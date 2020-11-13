@@ -16,7 +16,6 @@ import {
 import {merge, fromEvent, Observable, concat, throwError} from 'rxjs';
 import {Lesson} from '../model/lesson';
 
-
 @Component({
   selector: 'course',
   templateUrl: './course.component.html',
@@ -25,21 +24,15 @@ import {Lesson} from '../model/lesson';
 export class CourseComponent implements OnInit {
 
   course: Course;
-
   lessons: Lesson[];
 
   constructor(private route: ActivatedRoute) {
-
 
   }
 
   ngOnInit() {
 
-
-
   }
-
-
 }
 
 

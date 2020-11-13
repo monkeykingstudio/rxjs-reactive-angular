@@ -19,7 +19,7 @@ export class CoursesCardListComponent implements OnInit {
 
   constructor(private dialog: MatDialog) {
 
-   }
+  }
 
   ngOnInit(): void {
 
