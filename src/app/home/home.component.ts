@@ -5,6 +5,7 @@ import {catchError, delay, delayWhen, filter, finalize, map, retryWhen, shareRep
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {CourseDialogComponent} from '../course-dialog/course-dialog.component';
 import {CoursesService} from '../services/courses.service';
+import { LoadingService } from 'app/loading/loading.service';
 
 
 @Component({
@@ -15,22 +16,23 @@ import {CoursesService} from '../services/courses.service';
 export class HomeComponent implements OnInit {
 
   beginnerCourses$: Observable<Course[]>;
-
   advancedCourses$: Observable<Course[]>;
 
-
   constructor(
-    private coursesService: CoursesService) {
+    private coursesService: CoursesService,
+    private loadingService: LoadingService) {
   }
 
   ngOnInit() {
     this.reloadCourses();
   }
 
-  reloadCourses(){
+  reloadCourses() {
+    this.loadingService.loadingOn();
     const courses$ = this.coursesService.loadAllCourses()
       .pipe(
-        map(courses => courses.sort(sortCoursesBySeqNo))
+        map(courses => courses.sort(sortCoursesBySeqNo)),
+        finalize(() => this.loadingService.loadingOff())
       );
 
     this.beginnerCourses$ = courses$
