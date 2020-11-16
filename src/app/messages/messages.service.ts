@@ -13,7 +13,6 @@ export class MessagesService {
       filter(val => val && val.length > 0)
     );
 
-
   showErrors(...errors: string[]) {
     this.subject.next(errors);
   }
