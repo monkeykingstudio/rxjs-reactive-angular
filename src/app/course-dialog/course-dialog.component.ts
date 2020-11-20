@@ -1,3 +1,4 @@
+import { LoadingService } from './../loading/loading.service';
 import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Course} from '../model/course';
@@ -11,7 +12,7 @@ import { MessagesService } from './../messages/messages.service';
   templateUrl: './course-dialog.component.html',
   styleUrls: ['./course-dialog.component.css'],
   providers: [
-    CoursesStore,
+    LoadingService,
     MessagesService
   ]
 })
