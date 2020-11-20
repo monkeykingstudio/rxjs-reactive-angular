@@ -3,8 +3,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Course} from '../model/course';
 import {FormBuilder, Validators, FormGroup} from '@angular/forms';
 import * as moment from 'moment';
-import {catchError} from 'rxjs/operators';
-import {throwError} from 'rxjs';
 import { CoursesStore } from './../services/courses.store';
 import { MessagesService } from './../messages/messages.service';
 
@@ -50,12 +48,6 @@ export class CourseDialogComponent implements AfterViewInit {
 
       this.dialogRef.close(changes);
 
-      // this.loadingService.showLoaderUntilCompleted(courseChange$)
-      // .subscribe(
-      //   val => {
-      //     this.dialogRef.close(val);
-      //   }
-      // );
     }
 
     close() {

@@ -1,7 +1,7 @@
 import { MessagesService } from './../messages/messages.service';
 import { LoadingService } from './../loading/loading.service';
 import { HttpClient } from '@angular/common/http';
-import { catchError, filter, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, shareReplay } from 'rxjs/operators';
 import { Course, sortCoursesBySeqNo } from './../model/course';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Injectable} from '@angular/core';
@@ -52,13 +52,18 @@ export class CoursesStore {
     const newCourses: Course[] = courses.slice(0);
 
     newCourses[index] = newCourse;
-
     this.subject.next(newCourses);
 
     return this.httpClient.put(`/api/courses/${courseId}`, changes)
       .pipe(
-        
-      )
+        catchError(err => {
+          const message = 'Could not save course';
+          this.messages.showErrors(message);
+          console.log(message, err);
+          return throwError(err);
+        }),
+        shareReplay()
+      );
 
   }
 
